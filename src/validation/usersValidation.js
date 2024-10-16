@@ -1,30 +1,51 @@
 
 import Joi from 'joi';
 
-export const userValidateScheme = Joi.object({
-  name: Joi.string().min(2).max(64).optional().messages({
-    'string.base': '"Name" should be a text',
-    'string.empty': '"Name" cannot be empty',
-    'string.min': '"Name" should have at least 2 characters',
-    'string.max': '"Name" should not exceed 64 characters',
-  }),
+//   gender: Joi.string().valid('male', 'female').optional().messages({
+//     'any.only': '"Gender" must be one of "male", "female"',
+//   }),
 
-  email: Joi.string().email().optional().messages({
+export const userRegistrationValidation = Joi.object({
+  email: Joi.string().email().required().messages({
     'string.email': '"Email" must be a valid email address',
-    'string.empty': '"Email" cannot be empty',
+    'any.required': '"Email" is required',
   }),
-
-  gender: Joi.string().valid('male', 'female').optional().messages({
-    'any.only': '"Gender" must be one of "male", "female"',
-  }),
-
-  avatarUrl: Joi.string().uri().optional().messages({
-    'string.uri': '"Avatar URL" must be a valid URL',
-  }),
-
-  dailyNorm: Joi.number().min(0).max(10000).optional().messages({
-    'number.base': '"Daily Norm" must be a number',
-    'number.min': '"Daily Norm" must be at least 0',
-    'number.max': '"Daily Norm" cannot exceed 10000',
+  password: Joi.string().min(8).max(64).required().messages({
+    'string.min': '"Password" must be at least 8 characters long',
+    'string.max': '"Password" cannot be longer than 64 characters',
+    'any.required': '"Password" is required',
   }),
 });
+
+export const userLoginValidation = Joi.object({
+  email: Joi.string().email().required().messages({
+    'string.email': '"Email" must be a valid email address',
+    'any.required': '"Email" is required',
+  }),
+  password: Joi.string().min(8).max(64).required().messages({
+    'string.min': '"Password" must be at least 8 characters long',
+    'string.max': '"Password" cannot be longer than 64 characters',
+    'any.required': '"Password" is required',
+  }),
+});
+
+export const avatarUserUrlValidation = Joi.object({
+  avatarUrl: Joi.string().uri().optional().messages({
+    'string.uri': '"Avatar URL" must be a valid URL',
+     }),
+})
+
+export const updateUserValidation = Joi.object({
+  email: Joi.string().email().optional().messages({
+    'string.email': '"Email" must be a valid email address',
+  }),
+});
+
+export const updateUserWaterIntakeValidation = Joi.object({
+  dailyNorm: Joi.number().min(0).max(15000).required().messages({
+    'number.min': '"Daily Water Intake" must be at least 0 ml',
+    'number.max': '"Daily Water Intake" cannot exceed 15000 ml',
+    'any.required': '"Daily Water Intake" is required',
+  }),
+});
+
