@@ -85,3 +85,4 @@ export const logout = async (req, res) => {
     message: 'Logout completed successfully',
   });
 };
+
