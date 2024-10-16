@@ -1,6 +1,6 @@
 import createHttpError from 'http-errors';
-import SessionCollection from '../db/models/session.js';
-import UserCollection from '../db/models/User.js';
+import SessionCollection from '../db/models/sessions.js';
+import UserCollection from '../db/models/users.js';
 
 const findSessionByAccessToken = (accessToken) =>
   SessionCollection.findOne({ accessToken });

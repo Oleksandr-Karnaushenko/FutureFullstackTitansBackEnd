@@ -1,4 +1,4 @@
-import WaterCollection from '../db/models/water.js';
+import WaterCollection from '../db/models/waters.js';
 import createHttpError from 'http-errors';
 
 export const createWater = (payload) => {

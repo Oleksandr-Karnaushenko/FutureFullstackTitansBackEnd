@@ -2,8 +2,8 @@ import { randomBytes } from 'crypto';
 import bcrypt from 'bcrypt';
 import createHttpError from 'http-errors';
 
-import UserCollection from '../db/models/User.js';
-import SessionCollection from '../db/models/session.js';
+import UserCollection from '../db/models/users.js';
+import SessionCollection from '../db/models/sessions.js';
 
 import {
   accessTokenLifetime,
