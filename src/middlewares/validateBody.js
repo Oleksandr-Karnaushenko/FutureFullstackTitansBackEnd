@@ -1,13 +1,17 @@
-import HttpError from '../utils/HttpError.js';
+import createHttpError from 'http-errors';
 
-const validateBody = (schema) => {
-  return (req, _, next) => {
-    const { error } = schema.validate(req.body);
-    if (error) {
-      next(HttpError(400, error.message));
-    }
+const validateBody = (schema) => async (req, res, next) => {
+  try {
+    await schema.validateAsync(req.body, {
+      abortEarly: false,
+    });
     next();
-  };
+  } catch (err) {
+    const error = createHttpError(400, 'Incorrect input data', {
+      errors: err.details,
+    });
+    next(error);
+  }
 };
 
 export default validateBody;

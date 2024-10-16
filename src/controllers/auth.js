@@ -1,88 +1,67 @@
-// import { Conflict, Unauthorized } from 'http-errors';
-import pkg from 'http-errors';
-const { Conflict, Unauthorized } = pkg;
+import {
+  loginUser,
+  logoutUser,
+  refreshSession,
+  registerUser,
+} from '../services/auth.js';
 
-import bcrypt from 'bcrypt';
-import model from '../db/models/user.js';
-const { User } = model;
-import createToken from '../utils/createToken.js';
-
-export const register = async (req, res) => {
-  const { name, email, password } = req.body;
-  const user = await User.findOne({ email });
-  if (user) {
-    throw new Conflict('Email in use');
-  }
-
-  const newUser = new User({
-    name,
-    email,
-    avatarURL: null,
-    phone: null,
-    skype: null,
-    birthday: null,
+const setupSession = (res, session) => {
+  res.cookie('refreshToken', session.refreshToken, {
+    httpOnly: true,
+    expire: new Date(Date.now() + session.refreshTokenValidUntil),
   });
-  await newUser.setPassword(password);
+  res.cookie('sessionId', session._id, {
+    httpOnly: true,
+    expire: new Date(Date.now() + session.refreshTokenValidUntil),
+  });
+};
 
-  const payload = {
-    id: newUser._id,
-  };
-  const token = createToken(payload);
-  newUser.token = token;
+export const refreshSessionController = async (req, res) => {
+  const { refreshToken, sessionId } = req.cookies;
+  const session = await refreshSession({
+    refreshToken,
+    sessionId,
+  });
+  setupSession(res, session);
 
-  await newUser.save();
+  res.json({
+    status: 200,
+    message: 'Successfully refreshed a session!',
+    data: {
+      accessToken: session.accessToken,
+    },
+  });
+};
+
+export const registerUserController = async (req, res) => {
+  const user = await registerUser(req.body);
 
   res.status(201).json({
-    message: 'Registration completed successfully',
-    dataUser: {
-      name: newUser.name,
-      email: newUser.email,
-      birthday: newUser.birthday,
-      phone: newUser.phone,
-      skype: newUser.skype,
-      avatarURL: newUser.avatarURL,
-      token: newUser.token,
-    },
+    status: 201,
+    message: `Registration completed successfully!`,
+    data: user,
   });
 };
 
-export const login = async (req, res) => {
-  const { email, password } = req.body;
+export const loginUserController = async (req, res) => {
+  const session = await loginUser(req.body);
 
-  const user = await User.findOne({ email });
-
-  const passwordCompare = bcrypt.compareSync(password, user.password);
-  if (!user || !passwordCompare) {
-    throw Unauthorized('Email or password is wrong');
-  }
-
-  const payload = {
-    id: user._id,
-  };
-
-  const token = createToken(payload);
-  await User.findByIdAndUpdate(user._id, { token });
+  setupSession(res, session);
 
   res.status(200).json({
-    message: 'Login completed successfully',
-    dataUser: {
-      name: user.name,
-      email: user.email,
-      birthday: user.birthday,
-      phone: user.phone,
-      avatarURL: user.avatarURL,
-      skype: user.skype,
-      token,
-    },
+    status: 200,
+    message: `Successfully logged in an user!`,
+    data: { accessToken: session.accessToken },
   });
 };
 
-export const logout = async (req, res) => {
-  const { _id } = req.user;
-  await User.findByIdAndUpdate(_id, { token: null });
+export const logoutUserController = async (req, res) => {
+  if (req.cookies.sessionId) {
+    await logoutUser(req.cookies.sessionId);
+  }
 
-  res.status(204).json({
-    message: 'Logout completed successfully',
-  });
+  res.clearCookie('sessionId');
+  res.clearCookie('refreshToken');
+
+  res.status(204).send();
 };
-

@@ -1,25 +1,32 @@
-import { Schema, model } from "mongoose";
+import { Schema, model } from 'mongoose';
 
-const waterSchema = new Schema({
+import mongooseError from '../../utils/mongoosError.js';
 
+const waterSchema = new Schema(
+  {
     waterVolume: {
-        type: Number,
-        required: true,
+      type: Number,
+      required: true,
     },
     dailyNorm: {
-        type: Number,
+      type: Number,
     },
     userId: {
-        type: Schema.Types.ObjectId,
-        ref: 'users',
-        required: true,
+      type: Schema.Types.ObjectId,
+      ref: 'users',
+      required: true,
     },
     date: {
-        type: String,
-        required: true,
-    }
-}, { versionKey: false, timestamps: true });
+      type: String,
+      required: true,
+    },
+  },
+  { versionKey: false, timestamps: true },
+);
 
-const WaterCollection = model("water", waterSchema);
+waterSchema.post('save', mongooseError);
+waterSchema.post('findOneAndUpdate', mongooseError);
+
+const WaterCollection = model('water', waterSchema);
 
 export default WaterCollection;

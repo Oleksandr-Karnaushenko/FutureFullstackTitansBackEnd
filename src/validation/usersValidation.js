@@ -1,4 +1,3 @@
-
 import Joi from 'joi';
 
 export const userRegistrationValidation = Joi.object({
@@ -28,8 +27,8 @@ export const userLoginValidation = Joi.object({
 export const avatarUserUrlValidation = Joi.object({
   avatarUrl: Joi.string().uri().required().messages({
     'string.uri': '"Avatar URL" must be a valid URL',
-     }),
-})
+  }),
+});
 
 export const updateUserDataValidation = Joi.object({
   name: Joi.string().min(2).max(32).optional().messages({
@@ -49,7 +48,6 @@ export const updateUserDataValidation = Joi.object({
   }),
 });
 
-
 export const updateUserWaterIntakeValidation = Joi.object({
   dailyNorm: Joi.number().min(0).max(15000).required().messages({
     'number.min': '"Daily Water Intake" must be at least 0 ml',
@@ -57,4 +55,3 @@ export const updateUserWaterIntakeValidation = Joi.object({
     'any.required': '"Daily Water Intake" is required',
   }),
 });
-

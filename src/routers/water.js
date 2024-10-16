@@ -1,4 +1,5 @@
 import { Router } from 'express';
+
 import {
   addWaterController,
   deleteWaterController,
@@ -9,14 +10,15 @@ import isValidId from '../middlewares/isValidId.js';
 import authenticate from '../middlewares/authenticate.js';
 
 import ctrlWrapper from '../utils/ctrlWrapper.js';
-import validateBody from '../utils/validateBody.js';
+import validateBody from '../middlewares/validateBody.js';
 
 import {
   addWaterValidation,
   updateWaterValidation,
-} from '../validation/water.js';
+} from '../validation/waterValidation.js';
 
 const waterRouter = Router();
+
 waterRouter.use(authenticate);
 
 waterRouter.post(

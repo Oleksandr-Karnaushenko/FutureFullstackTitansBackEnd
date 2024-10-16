@@ -11,7 +11,8 @@ export const addWaterController = async (req, res) => {
   if (!date) {
     throw createHttpError(400, 'Date is required');
   }
-
+  console.log('userId');
+  console.log(userId);
   const data = await waterServices.createWater({
     waterVolume,
     userId,
@@ -21,23 +22,6 @@ export const addWaterController = async (req, res) => {
   res.status(201).json({
     status: 201,
     message: 'Successfully add record',
-    data,
-  });
-};
-
-export const upsertWaterController = async (req, res) => {
-  const { id } = req.params;
-  const { isNew, data } = await waterServices.updateWater(
-    { _id: id },
-    req.body,
-    { upsert: true },
-  );
-
-  const status = isNew ? 201 : 200;
-
-  res.status(status).json({
-    status,
-    message: 'Water record upsert successfully',
     data,
   });
 };

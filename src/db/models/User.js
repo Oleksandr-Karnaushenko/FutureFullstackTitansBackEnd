@@ -1,33 +1,40 @@
-import { Schema, model } from "mongoose";
+import { Schema, model } from 'mongoose';
 
-const userSchema = new Schema({
+import mongooseError from '../../utils/mongoosError.js';
+
+const userSchema = new Schema(
+  {
     name: {
-        type: String,
-        required: true,
+      type: String,
     },
     email: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     password: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     gender: {
-        type: String,
-        enum: ['male', 'female'],
-        default: 'female',
-        required: true,
+      type: String,
+      enum: ['male', 'female'],
+      default: 'female',
+      required: true,
     },
     dailyNorm: {
-        type: Number,
-        default: 1500,
+      type: Number,
+      default: 1500,
     },
     avatarUrl: {
-        type: String,
-    }
-}, { versionKey: false, timestamps: true });
+      type: String,
+    },
+  },
+  { versionKey: false, timestamps: true },
+);
 
-const UserCollection = model("user", userSchema);
+userSchema.post('save', mongooseError);
+userSchema.post('findOneAndUpdate', mongooseError);
 
-export default UserCollection;
+const UserSchema = model('user', userSchema);
+
+export default UserSchema;
