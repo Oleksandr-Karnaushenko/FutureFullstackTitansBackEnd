@@ -26,7 +26,7 @@ export const userLoginValidation = Joi.object({
 });
 
 export const avatarUserUrlValidation = Joi.object({
-  avatarUrl: Joi.string().uri().optional().messages({
+  avatarUrl: Joi.string().uri().required().messages({
     'string.uri': '"Avatar URL" must be a valid URL',
      }),
 })
@@ -39,7 +39,7 @@ export const updateUserDataValidation = Joi.object({
   email: Joi.string().email().optional().messages({
     'string.email': '"Email" must be a valid email address',
   }),
-  password: Joi.string().min(8).max(64).required().messages({
+  password: Joi.string().min(8).max(64).optional().messages({
     'string.min': '"Password" must be at least 8 characters long',
     'string.max': '"Password" cannot be longer than 64 characters',
     'any.required': '"Password" is required',
