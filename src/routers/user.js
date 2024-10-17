@@ -4,6 +4,6 @@ import { getUserInfoController } from '../controllers/user.js';
 
 const userRouter = Router();
 
-userRouter.get('/users/:userId', getUserInfoController);
+userRouter.get('/:userId', getUserInfoController);
 
 export default userRouter;

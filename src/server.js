@@ -7,6 +7,9 @@ import dotenv from 'dotenv';
 import env from './utils/env.js';
 import router from './routers/index.js';
 
+import { notFoundHandler } from './middlewares/notFoundHandler.js';
+import { errorHandler } from './middlewares/errorHandler.js';
+
 dotenv.config();
 
 const PORT = Number(env('PORT', '3000')) || 3000;
@@ -33,6 +36,10 @@ const setupServer = () => {
   });
 
   app.use(router);
+
+  app.use('*', notFoundHandler);
+
+  app.use(errorHandler);
 
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
