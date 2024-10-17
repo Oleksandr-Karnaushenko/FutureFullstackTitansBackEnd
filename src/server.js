@@ -9,6 +9,7 @@ import router from './routers/index.js';
 
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import { errorHandler } from './middlewares/errorHandler.js';
+import { UPLOAD_DIR } from './constants/users.js';
 
 dotenv.config();
 
@@ -20,6 +21,8 @@ const setupServer = () => {
   app.use(express.json());
   app.use(cors());
   app.use(cookieParser());
+
+  app.use('/uploads', express.static(UPLOAD_DIR));
 
   app.use(
     pino({
