@@ -1,5 +1,5 @@
 import createHttpError from 'http-errors';
-import UserCollection from '../db/models/User.js';
+import UserCollection from '../db/models/users.js';
 
 export const updateUser = async (userId, payload) => {
   const result = await UserCollection.findOneAndUpdate(

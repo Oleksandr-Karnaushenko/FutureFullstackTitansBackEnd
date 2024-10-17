@@ -7,11 +7,17 @@ import {
   getUserInfoController,
   uploadAvatarController,
 } from '../controllers/user.js';
+import { upload } from '../middlewares/multer.js';
 
 const userRouter = Router();
 
 userRouter.get('/:userId', isValidId, ctrlWrapper(getUserInfoController));
 
-userRouter.patch('/:userId', isValidId, ctrlWrapper(uploadAvatarController));
+userRouter.patch(
+  '/avatar/:userId',
+  isValidId,
+  upload.single('avatarUrl'),
+  ctrlWrapper(uploadAvatarController),
+);
 
 export default userRouter;
