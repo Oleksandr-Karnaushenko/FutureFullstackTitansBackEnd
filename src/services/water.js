@@ -32,3 +32,41 @@ export const updateWater = async (filter, data, options = {}) => {
 };
 
 export const deleteWater = (filter) => WaterCollection.findOneAndDelete(filter);
+
+export const getWaterInfoToday = async (userId) => {
+  const currentDate = new Date().toISOString().split('T')[0];
+  const waterEntries = await WaterCollection.find({
+    date: currentDate,
+    userId,
+  }).sort({ updatedAt: 1 });
+
+  if (!waterEntries || waterEntries.length === 0) {
+    throw {
+      status: 404,
+      message: 'No water consumption records found for today',
+    };
+  }
+
+  const totalWaterVolume = waterEntries.reduce(
+    (sum, item) => sum + item.waterVolume,
+    0,
+  );
+
+  const dailyNorm = waterEntries[waterEntries.length - 1].dailyNorm;
+
+  const waterVolumeInPercent = Math.min(
+    (totalWaterVolume / dailyNorm) * 100,
+    100,
+  );
+
+  const waterVolumeTimeEntries = waterEntries.map((item) => ({
+    waterVolume: item.waterVolume,
+    time: item.createdAt.toISOString().split('T')[1].split('.')[0],
+  }));
+
+  return {
+    totalWaterVolume, // Загальна кількістю випитої води за поточний день.
+    waterVolumeInPercent, // Кількість випитої води у відсотках від норми за поточний день. dailyNorm - останнє відредаговане юзером.
+    waterVolumeTimeEntries, // Масив записів з часом і кількістю випитої води за поточний день.
+  };
+};

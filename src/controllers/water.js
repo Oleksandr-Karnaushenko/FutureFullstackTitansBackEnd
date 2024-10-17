@@ -48,3 +48,18 @@ export const deleteWaterController = async (req, res) => {
 
   res.status(204).send();
 };
+
+export const getWaterInfoTodayController = async (req, res) => {
+  const { _id: userId } = req.user;
+  const data = await waterServices.getWaterInfoToday(userId);
+
+  if (!data) {
+    throw createHttpError(404, 'Water record not found');
+  }
+
+  res.json({
+    status: 200,
+    message: 'Successfully geted water consumption data for today',
+    data,
+  });
+};
