@@ -1,0 +1,32 @@
+type: object
+required:
+  - status
+  - message
+  - data
+properties:
+  status:
+    type: integer
+    example: 200
+  message:
+    type: string
+    example: 'Successfully logged in!'
+  data:
+    type: object
+    properties:
+      userId:
+        type: string
+        example: '609e126aa08b5b3c88b728db'
+      accessToken:
+        type: string
+        example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'
+      refreshToken:
+        type: string
+        example: 'dGhpcyBpcyBhIHJlZnJlc2ggdG9rZW4...'
+      accessTokenValidUntil:
+        type: string
+        format: date-time
+        example: '2024-10-01T12:00:00.000Z'
+      refreshTokenValidUntil:
+        type: string
+        format: date-time
+        example: '2024-10-15T12:00:00.000Z'

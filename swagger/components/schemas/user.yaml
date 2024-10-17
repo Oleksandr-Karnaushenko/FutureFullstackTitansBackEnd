@@ -1,0 +1,31 @@
+type: object
+required:
+  - email
+  - password
+  - gender
+properties:
+  name:
+    type: string
+    description: "User's name"
+    example: Jon Woker
+  email:
+    type: string
+    description: "User's email"
+    example: johndoe@example.com
+  password:
+    type: string
+    description: "User's password"
+    example: 'SecurePassword123!'
+  gender:
+    type: string
+    enum: ['male', 'female']
+    description: "User's gender"
+    example: female
+  dailyNorm:
+    type: number
+    description: "User's dailyNorm"
+    example: 1500
+  avatarUrl:
+    type: string
+    description: "URL to the user's avatar image"
+    example: 'https://example.com/images/user-avatar.jpg'

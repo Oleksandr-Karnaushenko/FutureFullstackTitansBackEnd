@@ -1,0 +1,24 @@
+tags:
+  - Auth
+summary: Register a new user
+operationId: registerUser
+description: 'Register a new user'
+security:
+  - bearerAuth: []
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../../components/schemas/user.yaml'
+responses:
+  '201':
+    description: User successfully registered
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/responses/AuthSuccessResponse.yaml'
+  '400':
+    $ref: '../../components/responses/400.yaml'
+  '401':
+    $ref: '../../components/responses/401.yaml'

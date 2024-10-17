@@ -1,0 +1,24 @@
+tags:
+  - Auth
+summary: User login
+operationId: loginUser
+description: 'Login contact '
+security:
+  - bearerAuth: []
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: ..\..\components\schemas\user.yaml
+responses:
+  '200':
+    description: User successfully logged in
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/responses/AuthSuccessResponse.yaml'
+  '400':
+    $ref: '../../components/responses/400.yaml'
+  '401':
+    $ref: '../../components/responses/401.yaml'

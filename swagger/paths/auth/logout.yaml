@@ -1,0 +1,12 @@
+tags:
+  - Auth
+summary: User logout
+operationId: logoutUser
+description: 'logout contact'
+security:
+  - bearerAuth: []
+responses:
+  '204':
+    description: Successfully logged out
+  '401':
+    $ref: ../../components/responses/401.yaml
