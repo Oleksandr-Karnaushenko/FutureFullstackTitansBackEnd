@@ -28,12 +28,10 @@ export const uploadAvatarController = async (req, res, next) => {
     return;
   }
 
-  console.log(result);
-
   res.json({
     status: 200,
-    message: `Successfully patched a user!`,
-    data: result.student,
+    message: `Successfully added avatarUrl to user!`,
+    data: result,
   });
 };
 
@@ -46,5 +44,17 @@ export const getUserInfoController = async (req, res) => {
     status: 200,
     message: 'User information successfully found',
     data: user,
+  });
+};
+
+export const patchUserInfoController = async (req, res, next) => {
+  const { userId } = req.params;
+
+  const data = await userServices.updateUser(userId, req.body);
+
+  res.json({
+    status: 200,
+    message: `Successfully patched user!`,
+    data,
   });
 };
