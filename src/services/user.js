@@ -1,8 +1,14 @@
 import createHttpError from 'http-errors';
 import UserCollection from '../db/models/User.js';
 
-export const findUser = async (userId) =>
-  await UserCollection.findOne({ _id: userId });
+export const updateUser = async (userId, payload) => {
+  const result = await UserCollection.findOneAndUpdate(
+    { _id: userId },
+    payload,
+  );
+
+  return result;
+};
 
 export const getUserInfo = async (userId) => {
   const user = await UserCollection.findById(userId);

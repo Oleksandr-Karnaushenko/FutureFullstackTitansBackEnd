@@ -1,9 +1,9 @@
 import * as userServices from '../services/user.js';
 
-// export const uploadAvatarController = async (req, res) => {
-//   const { userId } = req.params;
-//   const user = await userServices.findUser(userId);
-// };
+export const uploadAvatarController = async (req, res) => {
+  const { userId } = req.params;
+  const avatar = req.file;
+};
 
 export const getUserInfoController = async (req, res) => {
   const { userId } = req.params;

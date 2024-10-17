@@ -1,9 +1,17 @@
 import { Router } from 'express';
 
-import { getUserInfoController } from '../controllers/user.js';
+import isValidId from '../middlewares/isValidId.js';
+import ctrlWrapper from '../utils/ctrlWrapper.js';
+
+import {
+  getUserInfoController,
+  uploadAvatarController,
+} from '../controllers/user.js';
 
 const userRouter = Router();
 
-userRouter.get('/:userId', getUserInfoController);
+userRouter.get('/:userId', isValidId, ctrlWrapper(getUserInfoController));
+
+userRouter.patch('/:userId', isValidId, ctrlWrapper(uploadAvatarController));
 
 export default userRouter;
