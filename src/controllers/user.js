@@ -52,9 +52,31 @@ export const patchUserInfoController = async (req, res, next) => {
 
   const data = await userServices.updateUser(userId, req.body);
 
+  if (!data) {
+    next(createHttpError(404, 'User not found'));
+    return;
+  }
+
   res.json({
     status: 200,
     message: `Successfully patched user!`,
+    data,
+  });
+};
+
+export const updateUserDailyWaterNormController = async (req, res, next) => {
+  const { userId } = req.params;
+
+  const data = await userServices.updateUser(userId, req.body);
+
+  if (!data) {
+    next(createHttpError(404, 'User not found'));
+    return;
+  }
+
+  res.json({
+    status: 200,
+    message: `Successfully add daily water rate to user!`,
     data,
   });
 };
