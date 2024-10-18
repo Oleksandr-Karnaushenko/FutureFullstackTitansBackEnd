@@ -11,16 +11,20 @@ cloudinary.v2.config({
   api_secret: env(CLOUDINARY.API_SECRET),
 });
 
-// const transformationSettings = {
-//   gravity: 'face',
-//   height: 160,
-//   width: 160,
-//   crop: 'thumb',
-// };
-// cloudinary.image(file, { transformation: [transformationSettings] });
+const transformationSettings = {
+  gravity: 'face',
+  height: 160,
+  width: 160,
+  crop: 'thumb',
+  quality: 'auto',
+  fetch_format: 'auto',
+};
 
-export const saveFileToCloudinary = async (file) => {
-  const response = await cloudinary.v2.uploader.upload(file.path);
+export const saveFileToCloudinary = async (file, folder) => {
+  const response = await cloudinary.v2.uploader.upload(file.path, {
+    folder: folder,
+    transformation: [transformationSettings],
+  });
 
   await fs.unlink(file.path);
   return response.secure_url;
