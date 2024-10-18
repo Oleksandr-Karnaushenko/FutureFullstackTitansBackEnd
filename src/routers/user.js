@@ -15,6 +15,8 @@ import {
 
 const userRouter = Router();
 
+// waterRouter.use(authenticate);
+
 userRouter.get(
   '/:userId',
   isValidId,
