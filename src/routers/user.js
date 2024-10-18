@@ -6,6 +6,7 @@ import ctrlWrapper from '../utils/ctrlWrapper.js';
 import * as userControllers from '../controllers/user.js';
 import { upload } from '../middlewares/multer.js';
 import validateBody from '../middlewares/validateBody.js';
+import authenticate from '../middlewares/authenticate.js';
 
 import {
   avatarUserUrlValidation,
@@ -15,7 +16,7 @@ import {
 
 const userRouter = Router();
 
-// waterRouter.use(authenticate);
+// userRouter.use(authenticate);
 
 userRouter.get(
   '/:userId',
