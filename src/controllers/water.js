@@ -3,7 +3,8 @@ import createHttpError from 'http-errors';
 import * as waterServices from '../services/water.js';
 
 export const addWaterController = async (req, res) => {
-  const { waterVolume, userId, date } = req.body;
+  const { _id: userId } = req.user;
+  const { waterVolume, date } = req.body;
   if (waterVolume > 5000) {
     throw createHttpError(400, 'Water volume cannot exceed 5000 ml');
   }
@@ -11,8 +12,7 @@ export const addWaterController = async (req, res) => {
   if (!date) {
     throw createHttpError(400, 'Date is required');
   }
-  console.log('userId');
-  console.log(userId);
+
   const data = await waterServices.createWater({
     waterVolume,
     userId,
@@ -28,7 +28,8 @@ export const addWaterController = async (req, res) => {
 
 export const patchWaterController = async (req, res) => {
   const { id } = req.params;
-  const result = await waterServices.updateWater({ _id: id }, req.body);
+  const { _id: userId } = req.user;
+  const result = await waterServices.updateWater({ _id: id, userId }, req.body);
   if (!result) {
     throw createHttpError(404, 'Water record not found');
   }
@@ -41,7 +42,8 @@ export const patchWaterController = async (req, res) => {
 
 export const deleteWaterController = async (req, res) => {
   const { id } = req.params;
-  const data = await waterServices.deleteWater({ _id: id });
+  const { _id: userId } = req.user;
+  const data = await waterServices.deleteWater({ _id: id, userId });
   if (!data) {
     throw createHttpError(404, 'Water record not found');
   }
