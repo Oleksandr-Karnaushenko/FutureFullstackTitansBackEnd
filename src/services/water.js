@@ -34,6 +34,26 @@ export const updateWater = async (filter, data, options = {}) => {
 
 export const deleteWater = (filter) => WaterCollection.findOneAndDelete(filter);
 
+export const getMonthWater = async({filter={}})=>{
+
+  const waterQuery = WaterCollection.find();
+
+  if (filter.userId) {
+    waterQuery.where('userId').equals(filter.userId);
+  }
+
+  if (filter.year && filter.month) {
+    const monthString = filter.month.toString().padStart(2, '0');
+    const regex = new RegExp(`^${filter.year}-${monthString}`);    
+    waterQuery.where('date').regex(regex);
+  }
+
+  const data = await waterQuery.exec();
+    return {
+      data:data
+  };
+  };
+
 export const getWaterInfoToday = async (userId) => {
   const today = new Date();
   const startCurrentDate = new Date(
