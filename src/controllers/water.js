@@ -1,7 +1,7 @@
 import createHttpError from 'http-errors';
 
 import * as waterServices from '../services/water.js';
-import parseWaterFilterParams from "../utils/filter/parseWaterFilterParams.js";
+import parseWaterFilterParams from '../utils/filter/parseWaterFilterParams.js';
 
 export const addWaterController = async (req, res) => {
   const { _id: userId } = req.user;
@@ -52,13 +52,10 @@ export const deleteWaterController = async (req, res) => {
   res.status(204).send();
 };
 
-
-export const getMonthWaterController = async (req, res)=>{
-
+export const getMonthWaterController = async (req, res) => {
   const filter = parseWaterFilterParams(req.query);
   const { _id: userId } = req.user;
   const data = await waterServices.getMonthWater({
-
     filter: { ...filter, userId },
   });
 
@@ -68,7 +65,6 @@ export const getMonthWaterController = async (req, res)=>{
     data: data,
   });
 };
-
 
 export const getWaterInfoTodayController = async (req, res) => {
   const { _id: userId } = req.user;
@@ -84,4 +80,3 @@ export const getWaterInfoTodayController = async (req, res) => {
     data,
   });
 };
-

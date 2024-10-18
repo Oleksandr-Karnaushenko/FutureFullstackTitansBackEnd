@@ -16,7 +16,7 @@ import {
 
 const userRouter = Router();
 
-// userRouter.use(authenticate);
+userRouter.use(authenticate);
 
 userRouter.get(
   '/:userId',

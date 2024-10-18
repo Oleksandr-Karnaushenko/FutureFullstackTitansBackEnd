@@ -8,6 +8,11 @@ export const uploadAvatarController = async (req, res, next) => {
   const { userId } = req.params;
   const avatar = req.file;
 
+  if (!avatar) {
+    next(createHttpError(400, 'Empty data'));
+    return;
+  }
+
   let avatarUrl;
 
   if (avatar) {
