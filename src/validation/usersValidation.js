@@ -43,6 +43,11 @@ export const updateUserDataValidation = Joi.object({
     'string.max': '"Password" cannot be longer than 64 characters',
     'any.required': '"Password" is required',
   }),
+  oldPassword: Joi.string().min(8).max(64).optional().messages({
+    'string.min': '"Password" must be at least 8 characters long',
+    'string.max': '"Password" cannot be longer than 64 characters',
+    'any.required': '"Password" is required',
+  }),
   gender: Joi.string().valid('male', 'female').optional().messages({
     'any.only': '"Gender" must be one of "male", "female"',
   }),
