@@ -25,7 +25,7 @@ export const userLoginValidation = Joi.object({
 });
 
 export const avatarUserUrlValidation = Joi.object({
-  avatarUrl: Joi.string().uri().required().messages({
+  avatarUrl: Joi.string().uri().messages({
     'string.uri': '"Avatar URL" must be a valid URL',
   }),
 });

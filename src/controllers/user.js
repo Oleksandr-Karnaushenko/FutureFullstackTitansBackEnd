@@ -12,7 +12,7 @@ export const uploadAvatarController = async (req, res, next) => {
 
   if (avatar) {
     if (env('ENABLE_CLOUDINARY') === 'true') {
-      avatarUrl = await saveFileToCloudinary(avatar);
+      avatarUrl = await saveFileToCloudinary(avatar, 'avatars');
     } else {
       avatarUrl = await saveFileToUploadDir(avatar);
     }
