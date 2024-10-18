@@ -1,6 +1,7 @@
 import createHttpError from 'http-errors';
 
 import * as waterServices from '../services/water.js';
+import parseWaterFilterParams from "../utils/filter/parseWaterFilterParams.js";
 
 export const addWaterController = async (req, res) => {
   const { waterVolume, userId, date } = req.body;
@@ -48,3 +49,20 @@ export const deleteWaterController = async (req, res) => {
 
   res.status(204).send();
 };
+
+export const getMonthWaterController = async (req, res)=>{
+
+  const filter = parseWaterFilterParams(req.query);
+  const { _id: userId } = req.user;
+  const data = await waterServices.getMonthWater({
+
+    filter: { ...filter, userId },
+  });
+
+  res.status(200).json({
+    status: 200,
+    message: 'Successfully found month data!',
+    data: data,
+  });
+};
+

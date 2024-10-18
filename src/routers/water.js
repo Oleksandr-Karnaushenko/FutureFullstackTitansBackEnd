@@ -4,6 +4,7 @@ import {
   addWaterController,
   deleteWaterController,
   patchWaterController,
+  getMonthWaterController
 } from '../controllers/water.js';
 
 import isValidId from '../middlewares/isValidId.js';
@@ -33,5 +34,7 @@ waterRouter.patch(
   ctrlWrapper(patchWaterController),
 );
 waterRouter.delete('/:id', isValidId, ctrlWrapper(deleteWaterController));
+
+waterRouter.get("/month", ctrlWrapper(getMonthWaterController));
 
 export default waterRouter;
