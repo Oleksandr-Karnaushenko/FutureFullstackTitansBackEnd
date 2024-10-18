@@ -35,10 +35,19 @@ export const updateWater = async (filter, data, options = {}) => {
 export const deleteWater = (filter) => WaterCollection.findOneAndDelete(filter);
 
 export const getWaterInfoToday = async (userId) => {
-  const currentDate = new Date().toISOString().split('T')[0];
+  const today = new Date();
+  const startCurrentDate = new Date(
+    today.setUTCHours(0, 0, 0, 0),
+  ).toISOString();
+  const endCurrentDate = new Date(
+    today.setUTCHours(23, 59, 59, 999),
+  ).toISOString();
   const waterEntries = await WaterCollection.find({
-    date: currentDate,
     userId,
+    date: {
+      $gte: startCurrentDate,
+      $lte: endCurrentDate,
+    },
   }).sort({ date: 1 });
 
   if (!waterEntries || waterEntries.length === 0) {
@@ -57,13 +66,13 @@ export const getWaterInfoToday = async (userId) => {
   const { dailyNorm } = user;
 
   const waterVolumeInPercent = Math.min(
-    (totalWaterVolume / dailyNorm) * 100,
+    Math.floor((totalWaterVolume / dailyNorm) * 100),
     100,
   );
 
   const waterVolumeTimeEntries = waterEntries.map((item) => ({
     waterVolume: item.waterVolume,
-    time: item.createdAt.toISOString().split('T')[1].split('.')[0],
+    time: item.date.split('T')[1].substring(0, 5),
   }));
 
   return {
