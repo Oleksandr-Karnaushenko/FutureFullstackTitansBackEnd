@@ -12,7 +12,7 @@ export const uploadAvatarController = async (req, res, next) => {
 
   if (avatar) {
     if (env('ENABLE_CLOUDINARY') === 'true') {
-      avatarUrl = await saveFileToCloudinary(avatar);
+      avatarUrl = await saveFileToCloudinary(avatar, 'avatars');
     } else {
       avatarUrl = await saveFileToUploadDir(avatar);
     }
@@ -31,7 +31,7 @@ export const uploadAvatarController = async (req, res, next) => {
   res.json({
     status: 200,
     message: `Successfully added avatarUrl to user!`,
-    data: result,
+    data: { avatarUrl: result.avatarUrl },
   });
 };
 
@@ -50,12 +50,7 @@ export const getUserInfoController = async (req, res) => {
 export const patchUserInfoController = async (req, res, next) => {
   const { userId } = req.params;
 
-  const data = await userServices.updateUser(userId, req.body);
-
-  if (!data) {
-    next(createHttpError(404, 'User not found'));
-    return;
-  }
+  const data = await userServices.updateUserInfo(userId, req.body);
 
   res.json({
     status: 200,
@@ -77,6 +72,6 @@ export const updateUserDailyWaterNormController = async (req, res, next) => {
   res.json({
     status: 200,
     message: `Successfully add daily water rate to user!`,
-    data,
+    data: { dailyNorm: data.dailyNorm },
   });
 };

@@ -17,9 +17,17 @@ const limits = {
 };
 
 const fileFilter = (req, file, callback) => {
-  const extension = file.originalname.split('.').pop();
-  if (extension === 'exe') {
-    return callback(createHttpError(400, '.exe not valid extension'));
+  const extension = file.originalname.split('.').pop().toLowerCase();
+
+  const validExtension = ['jpg', 'jpeg', 'png', 'gif'];
+
+  if (!validExtension.includes(extension)) {
+    return callback(
+      createHttpError(
+        400,
+        `${extension} is not valid, allowed to download only jpg, jpeg, png, gif. `,
+      ),
+    );
   }
   callback(null, true);
 };
