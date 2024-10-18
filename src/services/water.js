@@ -1,5 +1,6 @@
 import WaterCollection from '../db/models/waters.js';
 import createHttpError from 'http-errors';
+import UserSchema from '../db/models/users.js';
 
 export const createWater = (payload) => {
   return WaterCollection.create(payload);
@@ -38,13 +39,10 @@ export const getWaterInfoToday = async (userId) => {
   const waterEntries = await WaterCollection.find({
     date: currentDate,
     userId,
-  }).sort({ updatedAt: 1 });
+  }).sort({ date: 1 });
 
   if (!waterEntries || waterEntries.length === 0) {
-    throw {
-      status: 404,
-      message: 'No water consumption records found for today',
-    };
+    throw createHttpError(404, 'No water consumption records found for today');
   }
 
   const totalWaterVolume = waterEntries.reduce(
@@ -52,7 +50,11 @@ export const getWaterInfoToday = async (userId) => {
     0,
   );
 
-  const dailyNorm = waterEntries[waterEntries.length - 1].dailyNorm;
+  const user = await UserSchema.findById(userId);
+  if (!user) {
+    throw createHttpError(404, 'User not found');
+  }
+  const { dailyNorm } = user;
 
   const waterVolumeInPercent = Math.min(
     (totalWaterVolume / dailyNorm) * 100,
