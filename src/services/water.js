@@ -1,5 +1,6 @@
 import WaterCollection from '../db/models/waters.js';
 import createHttpError from 'http-errors';
+import { getGroupedDataByDay } from '../utils/getGroupedDataByDay.js';
 
 export const createWater = (payload) => {
   return WaterCollection.create(payload);
@@ -44,11 +45,14 @@ export const getMonthWater = async({filter={}})=>{
 
   if (filter.year && filter.month) {
     const monthString = filter.month.toString().padStart(2, '0');
-    const regex = new RegExp(`^${filter.year}-${monthString}`);    
+    const regex = new RegExp(`^${filter.year}-${monthString}`);
     waterQuery.where('date').regex(regex);
   }
 
-  const data = await waterQuery.exec();
+  const result= await waterQuery.exec();
+
+  const data = await getGroupedDataByDay(result);
+
     return {
       data:data
   };
