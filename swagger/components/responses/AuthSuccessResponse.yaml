@@ -6,27 +6,27 @@ required:
 properties:
   status:
     type: integer
-    example: 200
+    example: 201
   message:
     type: string
     example: 'Successfully logged in!'
   data:
     type: object
     properties:
-      userId:
+      name:
         type: string
-        example: '609e126aa08b5b3c88b728db'
-      accessToken:
+        example: 'Antonio Banderus'
+      email:
         type: string
-        example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'
-      refreshToken:
+        example: 'banderus.a@gmail.com'
+      _id:
         type: string
-        example: 'dGhpcyBpcyBhIHJlZnJlc2ggdG9rZW4...'
-      accessTokenValidUntil:
+        example: '67135ea1260aecfe82bea7b7'
+      createdAt:
         type: string
         format: date-time
-        example: '2024-10-01T12:00:00.000Z'
-      refreshTokenValidUntil:
+        example: '2024-10-15T12:00:00.000Z'
+      updatedAt:
         type: string
         format: date-time
         example: '2024-10-15T12:00:00.000Z'

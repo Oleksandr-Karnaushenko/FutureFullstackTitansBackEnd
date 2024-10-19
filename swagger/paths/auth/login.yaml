@@ -17,8 +17,10 @@ responses:
     content:
       application/json:
         schema:
-          $ref: '../../components/responses/AuthSuccessResponse.yaml'
+          $ref: ..\..\components\responses\RefreshSuccessResponse.yaml
   '400':
     $ref: '../../components/responses/400.yaml'
   '401':
     $ref: '../../components/responses/401.yaml'
+  '500':
+    $ref: '../../components/responses/500.yaml'
