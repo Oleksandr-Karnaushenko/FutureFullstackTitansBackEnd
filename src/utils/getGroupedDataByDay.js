@@ -1,4 +1,4 @@
-export const getGroupedDataByDay = async (data) => {
+export const getGroupedDataByDay = async (data, userDailyNorm) => {
     const groupedData = new Map();
 
     await data.forEach(item => {
@@ -8,7 +8,7 @@ export const getGroupedDataByDay = async (data) => {
         // Якщо такий день вже є в Map, додаємо дані
         if (groupedData.has(dayKey)) {
           const existingData = groupedData.get(dayKey);
-          existingData.dailyNorm += item.dailyNorm;
+          existingData.dailyNorm += 0;
           existingData.waterVolume += item.waterVolume;
           existingData.count += 1;
           groupedData.set(dayKey, existingData);
@@ -16,7 +16,7 @@ export const getGroupedDataByDay = async (data) => {
           // Якщо такого дня ще немає, створюємо новий запис
           groupedData.set(dayKey, {
             date: dayKey,
-            dailyNorm: item.dailyNorm,
+            dailyNorm: userDailyNorm,
             waterVolume: item.waterVolume,
             count: 1
           });
@@ -25,14 +25,14 @@ export const getGroupedDataByDay = async (data) => {
 
       // Перетворюємо Map на масив об'єктів
     const result = Array.from(groupedData.values()).map(entry => {
-        const dailyNormAvg = entry.dailyNorm / entry.count;  // Середнє dailyNorm
-        const waterVolumeAvg = entry.waterVolume / entry.count;  // Середнє waterVolume
+        const dailyNormAvg = entry.dailyNorm;
+        const waterVolumeAvg = entry.waterVolume;
         const percent = (waterVolumeAvg / dailyNormAvg) * 100;  // Відсоток співвідношення
 
         return {
           date: entry.date,
-          dailyNorm: dailyNormAvg.toFixed(0),  // Округлюємо
-          waterVolume: waterVolumeAvg.toFixed(0),  // Округлюємо
+          dailyNorm: dailyNormAvg,
+          waterVolume: waterVolumeAvg,
           count: entry.count,
           percent: percent.toFixed(0)  // Округлюємо
         };

@@ -54,6 +54,12 @@ export const getMonthWaterController = async (req, res)=>{
 
   const filter = parseWaterFilterParams(req.query);
   const { _id: userId } = req.user;
+  const {month, year} = filter;
+
+  if ((!month || !year)) {
+    throw createHttpError(400, 'Date is required');
+  };
+
   const data = await waterServices.getMonthWater({
 
     filter: { ...filter, userId },
