@@ -1,3 +1,4 @@
+import UserCollection from '../db/models/users.js';
 import WaterCollection from '../db/models/waters.js';
 import createHttpError from 'http-errors';
 
@@ -37,7 +38,9 @@ export const updateWater = async (filter, data, options = {}) => {
 
 export const deleteWater = (filter) => WaterCollection.findOneAndDelete(filter);
 
+
 export const getMonthWater = async ({ filter = {} }) => {
+  
   const waterQuery = WaterCollection.find();
 
   if (filter.userId) {
@@ -50,9 +53,14 @@ export const getMonthWater = async ({ filter = {} }) => {
     waterQuery.where('date').regex(regex);
   }
 
-  const result = await waterQuery.exec();
+  const result= await waterQuery.exec();
+// const userIdd =filter.userId;
+  // const user = UserCollection.find({ _id: filter.userId });
+   const user = await UserCollection.find({_id: filter.userId }); 
 
-  const data = await getGroupedDataByDay(result);
+  const userDailyNorm =user[0].dailyNorm;
+
+  const data = await getGroupedDataByDay(result, userDailyNorm);
 
   return {
     data: data,
