@@ -53,6 +53,7 @@ export const getUserInfo = async (userId) => {
   if (!user) {
     throw createHttpError(404, `User with id ${userId} not found!`);
   }
+  delete user._doc.password;
 
   const name = user.email.split('@')[0];
 
