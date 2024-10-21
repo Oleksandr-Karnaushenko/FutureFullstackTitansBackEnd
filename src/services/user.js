@@ -55,7 +55,9 @@ export const getUserInfo = async (userId) => {
   }
   delete user._doc.password;
 
-  const name = user.email.split('@')[0];
+  if (!user.name) {
+    user.name = user.email.split('@')[0];
+  }
 
-  return { ...user._doc, name };
+  return user._doc;
 };
