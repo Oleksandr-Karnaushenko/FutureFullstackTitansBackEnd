@@ -22,7 +22,7 @@ export const updateUserInfo = async (userId, payload) => {
 
   const user = await UserCollection.findOne({ _id: userId });
   if (!user) {
-    throw createHttpError(401, 'User not found');
+    throw createHttpError(404, 'User not found');
   }
 
   if (oldPassword) {
@@ -34,7 +34,7 @@ export const updateUserInfo = async (userId, payload) => {
 
   const updateData = { ...otherPayload };
 
-  if (password) {
+  if (password && oldPassword) {
     const hashedPassword = await bcrypt.hash(password, 10);
     updateData.password = hashedPassword;
   }
@@ -54,6 +54,10 @@ export const getUserInfo = async (userId) => {
     throw createHttpError(404, `User with id ${userId} not found!`);
   }
   delete user._doc.password;
+
+  if (!user.name) {
+    user.name = user.email.split('@')[0];
+  }
 
   return user;
 };
