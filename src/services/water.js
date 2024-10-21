@@ -37,8 +37,7 @@ export const updateWater = async (filter, data, options = {}) => {
 
 export const deleteWater = (filter) => WaterCollection.findOneAndDelete(filter);
 
-export const getMonthWater = async({filter={}})=>{
-
+export const getMonthWater = async ({ filter = {} }) => {
   const waterQuery = WaterCollection.find();
 
   if (filter.userId) {
@@ -51,14 +50,14 @@ export const getMonthWater = async({filter={}})=>{
     waterQuery.where('date').regex(regex);
   }
 
-  const result= await waterQuery.exec();
+  const result = await waterQuery.exec();
 
   const data = await getGroupedDataByDay(result);
 
-    return {
-      data:data
+  return {
+    data: data,
   };
-  };
+};
 
 export const getWaterInfoToday = async (userId) => {
   const today = new Date();
@@ -75,6 +74,9 @@ export const getWaterInfoToday = async (userId) => {
       $lte: endCurrentDate,
     },
   }).sort({ date: 1 });
+
+  console.log('object');
+  console.log(waterEntries);
 
   if (!waterEntries || waterEntries.length === 0) {
     throw createHttpError(404, 'No water consumption records found for today');
@@ -97,6 +99,7 @@ export const getWaterInfoToday = async (userId) => {
   );
 
   const waterVolumeTimeEntries = waterEntries.map((item) => ({
+    _id: item._id,
     waterVolume: item.waterVolume,
     time: item.date.split('T')[1].substring(0, 5),
   }));
