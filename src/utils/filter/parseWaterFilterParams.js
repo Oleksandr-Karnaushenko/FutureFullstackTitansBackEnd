@@ -17,9 +17,9 @@ export const parseYear = (value) =>{
     if(value.length !== 4){
         return;
     }
-    // if(!Number(value)){
-    //     return;
-    // }
+    if(!Number(value)){
+        return;
+    }
     return value;
 };
 
