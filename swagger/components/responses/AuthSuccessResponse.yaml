@@ -9,16 +9,22 @@ properties:
     example: 201
   message:
     type: string
-    example: 'Successfully logged in!'
+    example: 'Registration completed successfully!'
   data:
     type: object
     properties:
-      name:
-        type: string
-        example: 'Antonio Banderus'
       email:
         type: string
         example: 'banderus.a@gmail.com'
+      gender:
+        type: string
+        enum: ['male', 'female']
+        description: "User's gender"
+        example: female
+      dailyNorm:
+        type: number
+        description: "User's dailyNorm"
+        example: 1500
       _id:
         type: string
         example: '67135ea1260aecfe82bea7b7'
