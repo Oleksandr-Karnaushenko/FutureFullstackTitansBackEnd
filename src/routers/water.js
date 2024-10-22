@@ -3,7 +3,9 @@ import { Router } from 'express';
 import {
   addWaterController,
   deleteWaterController,
+  getWaterInfoTodayController,
   patchWaterController,
+  getMonthWaterController,
 } from '../controllers/water.js';
 
 import isValidId from '../middlewares/isValidId.js';
@@ -33,5 +35,9 @@ waterRouter.patch(
   ctrlWrapper(patchWaterController),
 );
 waterRouter.delete('/:id', isValidId, ctrlWrapper(deleteWaterController));
+
+waterRouter.get('/monthInfo', ctrlWrapper(getMonthWaterController));
+
+waterRouter.get('/dayInfo', ctrlWrapper(getWaterInfoTodayController));
 
 export default waterRouter;
