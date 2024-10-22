@@ -1,8 +1,4 @@
 type: object
-required:
-  - email
-  - password
-  - gender
 properties:
   name:
     type: string
@@ -12,10 +8,17 @@ properties:
     type: string
     description: "User's email"
     example: johndoe@example.com
-  password:
+  _id:
     type: string
-    description: "User's password"
-    example: 'SecurePassword123!'
+    example: '67135ea1260aecfe82bea7b7'
+  createdAt:
+    type: string
+    format: date-time
+    example: '2024-10-15T12:00:00.000Z'
+  updatedAt:
+    type: string
+    format: date-time
+    example: '2024-10-15T12:00:00.000Z'
   gender:
     type: string
     enum: ['male', 'female']

@@ -1,0 +1,57 @@
+tags:
+  - Users
+summary: Get user dailyNorm
+operationId: patchDailyNorm
+description: 'Get user dailyNorm'
+security:
+  - bearerAuth: []
+parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+      description: 'User ID to fetch'
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          dailyNorm:
+            type: number
+            description: "User's dailyNorm"
+            example: 1500
+responses:
+  '200':
+    description: 'Get user dailyNorm'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully add daily water rate to user!
+            data:
+              type: object
+              properties:
+                dailyNorm:
+                  type: number
+                  description: "User's dailyNorm"
+                  example: 1500
+  '401':
+    $ref: ..\..\..\components\responses\user\401.yaml
+  '400':
+    $ref: ..\..\..\components\responses\user\400.yaml
+  '500':
+    $ref: ..\..\..\components\responses\500.yaml
+  '404':
+    $ref: ../..\..\components\responses\404.yaml

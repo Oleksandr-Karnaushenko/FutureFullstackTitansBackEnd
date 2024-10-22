@@ -24,6 +24,17 @@ paths:
   /auth/logout:
     post:
       $ref: ../swagger/paths/auth/logout.yaml
+  /users/{id}:
+    get:
+      $ref: ../swagger/paths/users/{id}/get.yaml
+    patch:
+      $ref: ../swagger/paths/users/{id}/patch.yaml
+  /users/waterRate/{id}:
+    patch:
+      $ref: ../swagger/paths/users/{id}/patchWaterRate.yaml
+  /users/avatar/{id}:
+    patch:
+      $ref: ../swagger/paths/users/{id}/patchAvatar.yaml
 
 components:
   securitySchemes:
