@@ -1,8 +1,8 @@
 tags:
   - Users
-summary: Get user dailyNorm
+summary: change user daily norm
 operationId: patchDailyNorm
-description: 'Get user dailyNorm'
+description: 'change user daily norm'
 security:
   - bearerAuth: []
 parameters:
@@ -47,10 +47,6 @@ responses:
                   type: number
                   description: "User's dailyNorm"
                   example: 1500
-  '401':
-    $ref: ..\..\..\components\responses\user\401.yaml
-  '400':
-    $ref: ..\..\..\components\responses\user\400.yaml
   '500':
     $ref: ..\..\..\components\responses\500.yaml
   '404':

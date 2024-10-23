@@ -1,8 +1,8 @@
 tags:
   - Users
-summary: Get user avatar
+summary: change user avatar
 operationId: patcAvatar
-description: 'Get user avatar'
+description: 'change user avatar'
 security:
   - bearerAuth: []
 parameters:
@@ -48,8 +48,6 @@ responses:
                   type: string
                   description: "URL to the user's avatar image"
                   example: 'https://example.com/images/user-avatar.jpg'
-  '401':
-    $ref: ..\..\..\components\responses\user\401.yaml
   '400':
     $ref: ..\..\..\components\responses\user\400.yaml
   '500':

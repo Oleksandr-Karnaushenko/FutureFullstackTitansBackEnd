@@ -1,4 +1,4 @@
-description: Invalid password
+description: Email or password invalid
 content:
   application/json:
     schema:
@@ -13,7 +13,7 @@ content:
           example: 401
         message:
           type: string
-          example: Invalid password
+          example: Email or password invalid
         data:
           type: object
           required:
@@ -21,4 +21,4 @@ content:
           properties:
             message:
               type: string
-              example: 'Invalid password'
+              example: 'Email or password invalid'

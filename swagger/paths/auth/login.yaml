@@ -52,9 +52,9 @@ responses:
                   type: string
                   example: '67179fc5a4fcebe60354b048'
   '400':
-    $ref: '../../components/responses/400.yaml'
+    $ref: '../../components/responses/auth/400.yaml'
   '401':
-    $ref: '../../components/responses/401.yaml'
+    $ref: '../../components/responses/auth/401.yaml'
   '500':
     $ref: '../../components/responses/500.yaml'
   '404':
