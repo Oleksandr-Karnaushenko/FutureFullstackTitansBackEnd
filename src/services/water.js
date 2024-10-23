@@ -81,12 +81,7 @@ export const getWaterInfoToday = async (userId) => {
     },
   }).sort({ date: 1 });
 
-  console.log('object');
-  console.log(waterEntries);
-
-  if (!waterEntries || waterEntries.length === 0) {
-    throw createHttpError(404, 'No water consumption records found for today');
-  }
+  if (!waterEntries || waterEntries.length === 0) return;
 
   const totalWaterVolume = waterEntries.reduce(
     (sum, item) => sum + item.waterVolume,
