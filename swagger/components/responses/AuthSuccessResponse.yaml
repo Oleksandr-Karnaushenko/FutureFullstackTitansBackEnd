@@ -1,0 +1,38 @@
+type: object
+required:
+  - status
+  - message
+  - data
+properties:
+  status:
+    type: integer
+    example: 201
+  message:
+    type: string
+    example: 'Registration completed successfully!'
+  data:
+    type: object
+    properties:
+      email:
+        type: string
+        example: 'banderus.a@gmail.com'
+      gender:
+        type: string
+        enum: ['male', 'female']
+        description: "User's gender"
+        example: female
+      dailyNorm:
+        type: number
+        description: "User's dailyNorm"
+        example: 1500
+      _id:
+        type: string
+        example: '67135ea1260aecfe82bea7b7'
+      createdAt:
+        type: string
+        format: date-time
+        example: '2024-10-15T12:00:00.000Z'
+      updatedAt:
+        type: string
+        format: date-time
+        example: '2024-10-15T12:00:00.000Z'
