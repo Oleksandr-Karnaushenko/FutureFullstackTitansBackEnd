@@ -11,8 +11,30 @@ tags:
     description: Auth operations.
 servers:
   - url: http://localhost:3000
-  - url:
 paths:
+  /auth/register:
+    post:
+      $ref: ../swagger/paths/auth/register.yaml
+  /auth/login:
+    post:
+      $ref: ../swagger/paths/auth/login.yaml
+  /auth/refresh:
+    post:
+      $ref: ../swagger/paths/auth/refresh.yaml
+  /auth/logout:
+    post:
+      $ref: ../swagger/paths/auth/logout.yaml
+  /users/{id}:
+    get:
+      $ref: ../swagger/paths/users/{id}/get.yaml
+    patch:
+      $ref: ../swagger/paths/users/{id}/patch.yaml
+  /users/waterRate/{id}:
+    patch:
+      $ref: ../swagger/paths/users/{id}/patchWaterRate.yaml
+  /users/avatar/{id}:
+    patch:
+      $ref: ../swagger/paths/users/{id}/patchAvatar.yaml
 
 components:
   securitySchemes:

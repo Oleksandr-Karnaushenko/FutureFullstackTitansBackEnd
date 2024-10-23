@@ -55,11 +55,11 @@ export const deleteWaterController = async (req, res) => {
 export const getMonthWaterController = async (req, res) => {
   const filter = parseWaterFilterParams(req.query);
   const { _id: userId } = req.user;
-  const {month, year} = filter;
+  const { month, year } = filter;
 
-  if ((!month || !year)) {
+  if (!month || !year) {
     throw createHttpError(400, 'Date is required');
-  };
+  }
 
   const data = await waterServices.getMonthWater({
     filter: { ...filter, userId },
@@ -75,10 +75,6 @@ export const getMonthWaterController = async (req, res) => {
 export const getWaterInfoTodayController = async (req, res) => {
   const { _id: userId } = req.user;
   const data = await waterServices.getWaterInfoToday(userId);
-
-  if (!data) {
-    throw createHttpError(404, 'Water record not found');
-  }
 
   res.json({
     status: 200,
