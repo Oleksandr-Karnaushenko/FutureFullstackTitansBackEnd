@@ -36,4 +36,4 @@ responses:
   '500':
     $ref: ..\..\..\components\responses\500.yaml
   '404':
-    $ref: ..\..\..\components\responses\user\404.yaml
+    $ref: ..\..\..\components\responses\user\404-user.yaml

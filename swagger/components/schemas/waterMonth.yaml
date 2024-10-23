@@ -1,0 +1,32 @@
+properties:
+  data:
+    type: array
+    items:
+      type: object
+      required:
+        - date
+        - dailyNorm
+        - waterVolume
+        - count
+        - percent
+      properties:
+        date:
+          type: string
+          example: '23.10'
+          description: 'Date in dd.mm format'
+        dailyNorm:
+          type: integer
+          example: 1500
+          description: 'Daily water consumption norm in milliliters'
+        waterVolume:
+          type: integer
+          example: 1600
+          description: 'Actual water volume consumed'
+        count:
+          type: integer
+          example: 3
+          description: 'Number of water intake entries'
+        percent:
+          type: string
+          example: '107'
+          description: 'Water consumption percentage relative to the daily norm'

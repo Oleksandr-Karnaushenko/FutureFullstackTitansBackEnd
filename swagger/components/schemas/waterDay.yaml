@@ -1,0 +1,25 @@
+properties:
+  totalWaterVolume:
+    type: integer
+    example: 1000
+  waterVolumeInPercent:
+    type: integer
+    example: 66
+  waterVolumeTimeEntries:
+    type: array
+    items:
+      type: object
+      required:
+        - _id
+        - waterVolume
+        - time
+      properties:
+        _id:
+          type: string
+          example: 6718c07fcf8c9f7bf63c07f3
+        waterVolume:
+          type: integer
+          example: 500
+        time:
+          type: string
+          example: '09:40'

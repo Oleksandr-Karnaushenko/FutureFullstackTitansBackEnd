@@ -35,7 +35,20 @@ paths:
   /users/avatar/{id}:
     patch:
       $ref: ../swagger/paths/users/{id}/patchAvatar.yaml
-
+  /water/dayInfo:
+    get:
+      $ref: ../swagger/paths/water/getDayInfo.yaml
+  /water/monthInfo:
+    get:
+      $ref: ../swagger/paths/water/getMonthInfo.yaml
+  /water:
+    post:
+      $ref: ../swagger/paths/water/post.yaml
+  /water/{id}:
+    patch:
+      $ref: ../swagger/paths/water/{id}/patch.yaml
+    delete:
+      $ref: ../swagger/paths/water/{id}/delete.yaml
 components:
   securitySchemes:
     bearerAuth:

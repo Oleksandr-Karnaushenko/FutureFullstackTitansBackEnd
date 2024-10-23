@@ -1,0 +1,33 @@
+tags:
+  - Water
+summary: Get water day
+operationId: getWaterDay
+description: 'Get water day '
+security:
+  - bearerAuth: []
+responses:
+  '200':
+    description: 'Get water day info'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully geted water consumption data for today
+            data:
+              type: object
+              $ref: ..\..\components\schemas\waterDay.yaml
+
+  '500':
+    $ref: ..\..\components\responses\500.yaml
+  '404':
+    $ref: ..\..\components\responses\water\404-water.yaml

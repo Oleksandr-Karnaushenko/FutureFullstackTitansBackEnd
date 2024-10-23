@@ -1,0 +1,48 @@
+tags:
+  - Water
+summary: Get water month
+operationId: getWaterMonth
+description: 'Get water month'
+security:
+  - bearerAuth: []
+parameters:
+  - in: query
+    name: month
+    required: true
+    schema:
+      type: integer
+      example: 10
+    description: 'The month for which to get water consumption data'
+  - in: query
+    name: year
+    required: true
+    schema:
+      type: integer
+      example: 2024
+    description: 'The year for which to get water consumption data'
+responses:
+  '200':
+    description: 'Get water month info'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully found month data!
+            data:
+              type: object
+              $ref: ..\..\components\schemas\waterMonth.yaml
+
+  '500':
+    $ref: ..\..\components\responses\500.yaml
+  '404':
+    $ref: ..\..\components\responses\water\404-water.yaml

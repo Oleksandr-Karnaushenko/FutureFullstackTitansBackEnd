@@ -1,0 +1,24 @@
+properties:
+  _id:
+    type: string
+    example: '67135ea1260aecfe82bea7b7'
+  waterVolume:
+    type: number
+    description: 'waterVolume'
+    example: 500
+  userId:
+    type: string
+    description: "User's ID"
+    example: '609e126aa08b5b3c88b728db'
+  data:
+    type: string
+    description: 'data`s water'
+    example: 2024-10-23 13:10
+  createdAt:
+    type: string
+    format: date-time
+    example: '2024-10-15T12:00:00.000Z'
+  updatedAt:
+    type: string
+    format: date-time
+    example: '2024-10-15T12:00:00.000Z'

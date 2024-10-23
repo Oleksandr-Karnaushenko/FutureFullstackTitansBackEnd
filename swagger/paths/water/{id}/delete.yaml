@@ -1,0 +1,35 @@
+tags:
+  - Water
+summary: Delete water by id
+operationId: deleteWater
+description: 'Delete water by id'
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: id
+    required: true
+    schema:
+      type: string
+      example: '65ca67e7ae7f10c88b598384'
+responses:
+  '204':
+    description: 'Water deleted successfully'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+          properties:
+            status:
+              type: integer
+              example: 204
+            message:
+              type: string
+              example: Successfully deleted water
+  '404':
+    $ref: ..\..\..\components\responses\water/404-water.yaml
+  '401':
+    $ref: ..\..\..\components\responses/water/401-water.yaml
