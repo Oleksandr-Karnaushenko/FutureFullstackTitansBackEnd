@@ -1,0 +1,47 @@
+tags:
+  - Water
+summary: change water info
+operationId: posthWater
+description: 'change water info'
+security:
+  - bearerAuth: []
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          data:
+            type: string
+            description: 'data`s water'
+            example: 2024-10-23 13:10
+          waterVolume:
+            type: number
+            description: 'waterVolume'
+            example: 500
+
+responses:
+  '201':
+    description: 'Successfully add record'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: Successfully add record
+            data:
+              type: object
+              $ref: '../../components/schemas/water.yaml'
+  '500':
+    $ref: ..\..\components\responses\500.yaml
+  '400':
+    $ref: ../../components/responses/water/400-water.yaml

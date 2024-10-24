@@ -49,7 +49,7 @@ responses:
                   description: "URL to the user's avatar image"
                   example: 'https://example.com/images/user-avatar.jpg'
   '400':
-    $ref: ..\..\..\components\responses\user\400.yaml
+    $ref: ..\..\..\components\responses\user\400-user.yaml
   '500':
     $ref: ..\..\..\components\responses\500.yaml
   '404':
