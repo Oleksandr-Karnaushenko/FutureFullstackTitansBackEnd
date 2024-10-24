@@ -1,4 +1,4 @@
-description: Bad Request error
+description: No access
 content:
   application/json:
     schema:
@@ -10,10 +10,10 @@ content:
       properties:
         status:
           type: integer
-          example: 400
+          example: 403
         message:
           type: string
-          example: BadRequestError
+          example: No access
         data:
           type: object
           required:
@@ -21,4 +21,4 @@ content:
           properties:
             message:
               type: string
-              example: 'Invalid request payload'
+              example: 'Access forbidden'

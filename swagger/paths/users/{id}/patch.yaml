@@ -1,8 +1,8 @@
 tags:
   - Users
-summary: change user info
+summary: Change user info
 operationId: patchUser
-description: 'change user info'
+description: 'Change user info'
 security:
   - bearerAuth: []
 parameters:
@@ -60,3 +60,9 @@ responses:
     $ref: ..\..\..\components\responses\500.yaml
   '404':
     $ref: ..\..\..\components\responses\404.yaml
+  '403':
+    $ref: ..\..\..\components\responses\user\403.yaml
+  '401':
+    $ref: ..\..\..\components\responses\/user/401-user.yaml
+  '400':
+    $ref: ..\..\..\components\responses\400.yaml

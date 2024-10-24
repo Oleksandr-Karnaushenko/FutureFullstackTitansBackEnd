@@ -9,6 +9,8 @@ import router from './routers/index.js';
 
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import { errorHandler } from './middlewares/errorHandler.js';
+import { swaggerDocs } from './middlewares/swaggerDocs.js';
+
 import { UPLOAD_DIR } from './constants/users.js';
 
 dotenv.config();
@@ -18,11 +20,30 @@ const PORT = Number(env('PORT', '3000')) || 3000;
 const setupServer = () => {
   const app = express();
 
+  const allowedOrigins = [
+    'http://localhost:5173',
+    'http://localhost:3000',
+    'https://water-tracker-front-end.vercel.app',
+  ];
+
+  const corsOptions = {
+    origin: (origin, callback) => {
+      if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+        callback(null, true); // Дозволити запит
+      } else {
+        callback(new Error('Not allowed by CORS')); // Заборонити запит
+      }
+    },
+    credentials: true, // Дозволити куки
+    optionsSuccessStatus: 200, // Для старих браузерів
+  };
+
   app.use(express.json());
-  app.use(cors());
+  app.use(cors(corsOptions));
   app.use(cookieParser());
 
   app.use('/uploads', express.static(UPLOAD_DIR));
+  app.use('/api-docs', swaggerDocs());
 
   app.use(
     pino({

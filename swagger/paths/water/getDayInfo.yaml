@@ -2,7 +2,7 @@ tags:
   - Water
 summary: Get water day
 operationId: getWaterDay
-description: 'Get water day '
+description: 'Get water info for a day '
 security:
   - bearerAuth: []
 responses:

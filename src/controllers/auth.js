@@ -17,7 +17,11 @@ const setupSession = (res, session) => {
 };
 
 export const refreshSessionController = async (req, res) => {
+  console.log('object');
+  console.log(req.cookies);
   const { refreshToken, sessionId } = req.cookies;
+  console.log('refreshToken');
+  console.log(refreshToken);
   const session = await refreshSession({
     refreshToken,
     sessionId,

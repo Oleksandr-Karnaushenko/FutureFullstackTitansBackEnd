@@ -7,7 +7,7 @@ import * as userControllers from '../controllers/user.js';
 import { upload } from '../middlewares/multer.js';
 import validateBody from '../middlewares/validateBody.js';
 import authenticate from '../middlewares/authenticate.js';
-import checkAccessToUsersData from '../middlewares/checkAccessToUsersData.js'
+import checkAccessToUsersData from '../middlewares/checkAccessToUsersData.js';
 
 import {
   avatarUserUrlValidation,
@@ -21,13 +21,15 @@ userRouter.use(authenticate);
 
 userRouter.get(
   '/:userId',
-  isValidId, checkAccessToUsersData,
+  isValidId,
+  checkAccessToUsersData,
   ctrlWrapper(userControllers.getUserInfoController),
 );
 
 userRouter.patch(
   '/avatar/:userId',
-  isValidId, checkAccessToUsersData,
+  isValidId,
+  checkAccessToUsersData,
   upload.single('avatarUrl'),
   validateBody(avatarUserUrlValidation),
   ctrlWrapper(userControllers.uploadAvatarController),
@@ -35,14 +37,16 @@ userRouter.patch(
 
 userRouter.patch(
   '/:userId',
-  isValidId, checkAccessToUsersData,
+  isValidId,
+  checkAccessToUsersData,
   validateBody(updateUserDataValidation),
   ctrlWrapper(userControllers.patchUserInfoController),
 );
 
 userRouter.patch(
   '/waterRate/:userId',
-  isValidId, checkAccessToUsersData,
+  isValidId,
+  checkAccessToUsersData,
   validateBody(updateUserWaterIntakeValidation),
   ctrlWrapper(userControllers.updateUserDailyWaterNormController),
 );

@@ -1,10 +1,9 @@
 import createHttpError from 'http-errors';
 
 const checkAccessToUsersData = (req, res, next) => {
-  const { id, userId } = req.params;
-  const reqId = userId || id;
+  const { userId } = req.params;
 
-  if (req.user._id.toString() !== reqId) {
+  if (req.user._id.toString() !== userId) {
     return next(createHttpError(403, 'Access forbidden'));
   }
   next();

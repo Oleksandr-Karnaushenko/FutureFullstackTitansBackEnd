@@ -1,8 +1,8 @@
 tags:
   - Users
-summary: change user daily norm
+summary: Change user daily norm
 operationId: patchDailyNorm
-description: 'change user daily norm'
+description: 'Change user daily norm'
 security:
   - bearerAuth: []
 parameters:
@@ -50,6 +50,8 @@ responses:
   '500':
     $ref: ..\..\..\components\responses\500.yaml
   '404':
-    $ref: ../..\..\components\responses\404.yaml
+    $ref: ..\..\..\components\responses\404.yaml
+  '403':
+    $ref: ..\..\..\components\responses\user\403.yaml
   '400':
-    $ref: ..\..\..\components\responses\user\400-waterRate.yaml
+    $ref: ..\..\..\components\responses\400.yaml

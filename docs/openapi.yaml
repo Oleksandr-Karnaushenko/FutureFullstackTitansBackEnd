@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   version: 1.0.0
-  title: app
+  title: Water Tracker App
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
@@ -9,8 +9,13 @@ info:
 tags:
   - name: Auth
     description: Auth operations.
+  - name: Users
+    description: Users operations.
+  - name: Water
+    description: Water operations.
 servers:
   - url: http://localhost:3000
+  - url: https://watertrackerbackend-1b9z.onrender.com
 paths:
   /auth/register:
     post:

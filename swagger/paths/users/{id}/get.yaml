@@ -1,8 +1,8 @@
 tags:
   - Users
-summary: Get user by id
+summary: Get user info by id
 operationId: getUser
-description: 'Get user by id'
+description: 'Get user info by id'
 security:
   - bearerAuth: []
 parameters:
@@ -37,3 +37,5 @@ responses:
     $ref: ..\..\..\components\responses\500.yaml
   '404':
     $ref: ..\..\..\components\responses\user\404-user.yaml
+  '403':
+    $ref: ..\..\..\components\responses\user\403.yaml

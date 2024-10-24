@@ -1,8 +1,8 @@
 tags:
   - Water
-summary: change water info
+summary: Add water info
 operationId: posthWater
-description: 'change water info'
+description: 'Add water info'
 security:
   - bearerAuth: []
 requestBody:

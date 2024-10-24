@@ -10,7 +10,6 @@ import {
 
 import isValidId from '../middlewares/isValidId.js';
 import authenticate from '../middlewares/authenticate.js';
-import checkAccessToUsersData from '../middlewares/checkAccessToUsersData.js'
 
 import ctrlWrapper from '../utils/ctrlWrapper.js';
 import validateBody from '../middlewares/validateBody.js';
@@ -31,11 +30,11 @@ waterRouter.post(
 );
 waterRouter.patch(
   '/:id',
-  isValidId, checkAccessToUsersData,
+  isValidId,
   validateBody(updateWaterValidation),
   ctrlWrapper(patchWaterController),
 );
-waterRouter.delete('/:id', isValidId, checkAccessToUsersData, ctrlWrapper(deleteWaterController));
+waterRouter.delete('/:id', isValidId, ctrlWrapper(deleteWaterController));
 
 waterRouter.get('/monthInfo', ctrlWrapper(getMonthWaterController));
 

@@ -1,8 +1,8 @@
 tags:
   - Water
-summary: change water info
+summary: Change water info
 operationId: patchWater
-description: 'change water info'
+description: 'Change water info'
 security:
   - bearerAuth: []
 parameters:

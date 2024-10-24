@@ -2,7 +2,7 @@ tags:
   - Water
 summary: Get water month
 operationId: getWaterMonth
-description: 'Get water month'
+description: 'Get water info for a month'
 security:
   - bearerAuth: []
 parameters:
@@ -44,7 +44,5 @@ responses:
 
   '500':
     $ref: ..\..\components\responses\500.yaml
-  '404':
-    $ref: ..\..\components\responses\water\404-water.yaml
   '400':
     $ref: ..\..\components\responses\water\400-water.yaml

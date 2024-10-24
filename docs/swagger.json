@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "version": "1.0.0",
-    "title": "app",
+    "title": "Water Tracker App",
     "license": {
       "name": "Apache 2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
@@ -12,12 +12,23 @@
   "servers": [
     {
       "url": "http://localhost:3000"
+    },
+    {
+      "url": "https://watertrackerbackend-1b9z.onrender.com"
     }
   ],
   "tags": [
     {
       "name": "Auth",
       "description": "Auth operations."
+    },
+    {
+      "name": "Users",
+      "description": "Users operations."
+    },
+    {
+      "name": "Water",
+      "description": "Water operations."
     }
   ],
   "paths": {
@@ -29,11 +40,7 @@
         "summary": "Register a new user",
         "operationId": "registerUser",
         "description": "Register a new user",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
+        "security": [],
         "requestBody": {
           "required": true,
           "content": {
@@ -74,12 +81,6 @@
           "400": {
             "$ref": "#/components/responses/400"
           },
-          "401": {
-            "$ref": "#/components/responses/401"
-          },
-          "404": {
-            "$ref": "#/components/responses/404"
-          },
           "409": {
             "$ref": "#/components/responses/409"
           },
@@ -96,12 +97,8 @@
         ],
         "summary": "User login",
         "operationId": "loginUser",
-        "description": "Login contact ",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
+        "description": "Login user ",
+        "security": [],
         "requestBody": {
           "required": true,
           "content": {
@@ -173,9 +170,6 @@
           "401": {
             "$ref": "#/components/responses/401"
           },
-          "404": {
-            "$ref": "#/components/responses/404"
-          },
           "500": {
             "$ref": "#/components/responses/500"
           }
@@ -190,11 +184,7 @@
         "summary": "Refresh user tokens",
         "operationId": "refreshTokens",
         "description": "Refresh user tokens",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
+        "security": [],
         "responses": {
           "200": {
             "description": "Successfully refreshed a session!",
@@ -206,14 +196,8 @@
               }
             }
           },
-          "400": {
-            "$ref": "#/components/responses/400"
-          },
           "401": {
             "$ref": "#/components/responses/401refresh"
-          },
-          "404": {
-            "$ref": "#/components/responses/404"
           },
           "500": {
             "$ref": "#/components/responses/500"
@@ -228,12 +212,8 @@
         ],
         "summary": "User logout",
         "operationId": "logoutUser",
-        "description": "logout contact",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
+        "description": "logout user",
+        "security": [],
         "responses": {
           "204": {
             "description": "Successfully logged out",
@@ -259,9 +239,6 @@
               }
             }
           },
-          "404": {
-            "$ref": "#/components/responses/404"
-          },
           "500": {
             "$ref": "#/components/responses/500"
           }
@@ -273,9 +250,9 @@
         "tags": [
           "Users"
         ],
-        "summary": "Get user by id",
+        "summary": "Get user info by id",
         "operationId": "getUser",
-        "description": "Get user by id",
+        "description": "Get user info by id",
         "security": [
           {
             "bearerAuth": []
@@ -322,6 +299,9 @@
               }
             }
           },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
           "404": {
             "$ref": "#/components/responses/404-user"
           },
@@ -334,9 +314,9 @@
         "tags": [
           "Users"
         ],
-        "summary": "change user info",
+        "summary": "Change user info",
         "operationId": "patchUser",
-        "description": "change user info",
+        "description": "Change user info",
         "security": [
           {
             "bearerAuth": []
@@ -418,6 +398,15 @@
               }
             }
           },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401-user"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
           "404": {
             "$ref": "#/components/responses/404"
           },
@@ -432,9 +421,9 @@
         "tags": [
           "Users"
         ],
-        "summary": "change user daily norm",
+        "summary": "Change user daily norm",
         "operationId": "patchDailyNorm",
-        "description": "change user daily norm",
+        "description": "Change user daily norm",
         "security": [
           {
             "bearerAuth": []
@@ -504,7 +493,10 @@
             }
           },
           "400": {
-            "$ref": "#/components/responses/400-water"
+            "$ref": "#/components/responses/400"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
           },
           "404": {
             "$ref": "#/components/responses/404"
@@ -520,9 +512,9 @@
         "tags": [
           "Users"
         ],
-        "summary": "change user avatar",
+        "summary": "Change user avatar",
         "operationId": "patcAvatar",
-        "description": "change user avatar",
+        "description": "Change user avatar",
         "security": [
           {
             "bearerAuth": []
@@ -595,6 +587,9 @@
           "400": {
             "$ref": "#/components/responses/400-user"
           },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
           "404": {
             "$ref": "#/components/responses/404"
           },
@@ -611,7 +606,7 @@
         ],
         "summary": "Get water day",
         "operationId": "getWaterDay",
-        "description": "Get water day ",
+        "description": "Get water info for a day ",
         "security": [
           {
             "bearerAuth": []
@@ -648,7 +643,7 @@
             }
           },
           "404": {
-            "$ref": "#/components/responses/404-water"
+            "$ref": "#/components/responses/404"
           },
           "500": {
             "$ref": "#/components/responses/500"
@@ -663,7 +658,7 @@
         ],
         "summary": "Get water month",
         "operationId": "getWaterMonth",
-        "description": "Get water month",
+        "description": "Get water info for a month",
         "security": [
           {
             "bearerAuth": []
@@ -721,8 +716,8 @@
               }
             }
           },
-          "404": {
-            "$ref": "#/components/responses/404-water"
+          "400": {
+            "$ref": "#/components/responses/400-water"
           },
           "500": {
             "$ref": "#/components/responses/500"
@@ -735,9 +730,9 @@
         "tags": [
           "Water"
         ],
-        "summary": "change water info",
+        "summary": "Add water info",
         "operationId": "posthWater",
-        "description": "change water info",
+        "description": "Add water info",
         "security": [
           {
             "bearerAuth": []
@@ -797,9 +792,6 @@
           "400": {
             "$ref": "#/components/responses/400-water"
           },
-          "404": {
-            "$ref": "#/components/responses/404-water"
-          },
           "500": {
             "$ref": "#/components/responses/500"
           }
@@ -811,9 +803,9 @@
         "tags": [
           "Water"
         ],
-        "summary": "change water info",
+        "summary": "Change water info",
         "operationId": "patchWater",
-        "description": "change water info",
+        "description": "Change water info",
         "security": [
           {
             "bearerAuth": []
@@ -885,6 +877,9 @@
               }
             }
           },
+          "400": {
+            "$ref": "#/components/responses/400-water"
+          },
           "404": {
             "$ref": "#/components/responses/404-water"
           },
@@ -941,11 +936,11 @@
               }
             }
           },
-          "401": {
-            "$ref": "#/components/responses/401-water"
-          },
           "404": {
             "$ref": "#/components/responses/404-water"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
           }
         }
       }
@@ -1222,7 +1217,7 @@
                 },
                 "message": {
                   "type": "string",
-                  "example": "BadRequestError"
+                  "example": "Invalid input data"
                 },
                 "data": {
                   "type": "object",
@@ -1232,7 +1227,7 @@
                   "properties": {
                     "message": {
                       "type": "string",
-                      "example": "Invalid request payload"
+                      "example": "Incorrect input data"
                     }
                   }
                 }
@@ -1270,6 +1265,43 @@
                     "message": {
                       "type": "string",
                       "example": "Email or password invalid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "403": {
+        "description": "No access",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 403
+                },
+                "message": {
+                  "type": "string",
+                  "example": "No access"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Access forbidden"
                     }
                   }
                 }
@@ -1333,7 +1365,7 @@
                 },
                 "message": {
                   "type": "string",
-                  "example": "Email in use"
+                  "example": "ConflictError"
                 },
                 "data": {
                   "type": "object",
@@ -1463,8 +1495,8 @@
           }
         }
       },
-      "400-water": {
-        "description": "Date is required",
+      "401-user": {
+        "description": "Password is invalid",
         "content": {
           "application/json": {
             "schema": {
@@ -1477,11 +1509,11 @@
               "properties": {
                 "status": {
                   "type": "integer",
-                  "example": 400
+                  "example": 401
                 },
                 "message": {
                   "type": "string",
-                  "example": "Date is required"
+                  "example": "Password is invalid"
                 },
                 "data": {
                   "type": "object",
@@ -1491,7 +1523,7 @@
                   "properties": {
                     "message": {
                       "type": "string",
-                      "example": "Date is required"
+                      "example": "Password is invalid"
                     }
                   }
                 }
@@ -1537,6 +1569,43 @@
           }
         }
       },
+      "400-water": {
+        "description": "Date is required",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Date is required"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Date is required"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "404-water": {
         "description": "NotFoundError",
         "content": {
@@ -1566,43 +1635,6 @@
                     "message": {
                       "type": "string",
                       "example": "Water record not found"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "401-water": {
-        "description": "UnauthorizedError",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "required": [
-                "status",
-                "message",
-                "data"
-              ],
-              "properties": {
-                "status": {
-                  "type": "integer",
-                  "example": 401
-                },
-                "message": {
-                  "type": "string",
-                  "example": "UnauthorizedError"
-                },
-                "data": {
-                  "type": "object",
-                  "required": [
-                    "message"
-                  ],
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Access token expired"
                     }
                   }
                 }

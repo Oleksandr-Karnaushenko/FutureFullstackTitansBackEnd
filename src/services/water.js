@@ -52,8 +52,7 @@ export const getMonthWater = async ({ filter = {} }) => {
   }
 
   const result = await waterQuery.exec();
-  // const userIdd =filter.userId;
-  // const user = UserCollection.find({ _id: filter.userId });
+
   const user = await UserCollection.find({ _id: filter.userId });
 
   const userDailyNorm = user[0].dailyNorm;

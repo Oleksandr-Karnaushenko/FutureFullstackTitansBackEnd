@@ -3,8 +3,7 @@ tags:
 summary: Register a new user
 operationId: registerUser
 description: 'Register a new user'
-security:
-  - bearerAuth: []
+security: []
 requestBody:
   required: true
   content:
@@ -31,12 +30,8 @@ responses:
         schema:
           $ref: '../../components/responses/AuthSuccessResponse.yaml'
   '400':
-    $ref: '../../components/responses/auth/400.yaml'
-  '401':
-    $ref: '../../components/responses/auth/401.yaml'
+    $ref: ../../components/responses/400.yaml
   '409':
     $ref: ..\..\components\responses\auth\409.yaml
   '500':
     $ref: '../../components/responses/500.yaml'
-  '404':
-    $ref: ..\..\components\responses\404.yaml
