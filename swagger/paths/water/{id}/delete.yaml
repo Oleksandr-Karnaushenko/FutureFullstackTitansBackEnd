@@ -31,5 +31,5 @@ responses:
               example: Successfully deleted water
   '404':
     $ref: ..\..\..\components\responses\water/404-water.yaml
-  '401':
-    $ref: ..\..\..\components\responses/water/401-water.yaml
+  '500':
+    $ref: ..\..\..\components\responses\500.yaml

@@ -46,3 +46,5 @@ responses:
     $ref: ..\..\components\responses\500.yaml
   '404':
     $ref: ..\..\components\responses\water\404-water.yaml
+  '400':
+    $ref: ..\..\components\responses\water\400-water.yaml
