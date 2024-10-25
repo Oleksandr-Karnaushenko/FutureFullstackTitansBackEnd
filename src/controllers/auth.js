@@ -8,20 +8,17 @@ import {
 const setupSession = (res, session) => {
   res.cookie('refreshToken', session.refreshToken, {
     httpOnly: true,
-    expire: new Date(Date.now() + session.refreshTokenValidUntil),
+    expires: new Date(session.refreshTokenValidUntil + Date.now()),
   });
   res.cookie('sessionId', session._id, {
     httpOnly: true,
-    expire: new Date(Date.now() + session.refreshTokenValidUntil),
+    expires: new Date(session.refreshTokenValidUntil + Date.now()),
   });
 };
 
 export const refreshSessionController = async (req, res) => {
-  console.log('object');
-  console.log(req.cookies);
   const { refreshToken, sessionId } = req.cookies;
-  console.log('refreshToken');
-  console.log(refreshToken);
+
   const session = await refreshSession({
     refreshToken,
     sessionId,
