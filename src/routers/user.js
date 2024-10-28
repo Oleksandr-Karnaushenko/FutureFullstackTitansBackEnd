@@ -19,6 +19,8 @@ const userRouter = Router();
 
 userRouter.use(authenticate);
 
+userRouter.get('/curent', ctrlWrapper(userControllers.getUserCurentController));
+
 userRouter.get(
   '/:userId',
   isValidId,

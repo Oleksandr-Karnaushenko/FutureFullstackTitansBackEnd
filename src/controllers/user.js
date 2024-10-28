@@ -80,3 +80,13 @@ export const updateUserDailyWaterNormController = async (req, res, next) => {
     data: { dailyNorm: data.dailyNorm },
   });
 };
+
+export const getUserCurentController = async (req, res) => {
+  const { _id: userId } = req.user;
+
+  res.json({
+    status: 200,
+    message: `Successfully logged in an user!`,
+    data: userId,
+  });
+};
