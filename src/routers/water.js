@@ -38,6 +38,6 @@ waterRouter.delete('/:id', isValidId, ctrlWrapper(deleteWaterController));
 
 waterRouter.get('/monthInfo', ctrlWrapper(getMonthWaterController));
 
-waterRouter.get('/dayInfo', ctrlWrapper(getWaterInfoTodayController));
+waterRouter.get('/dayInfo/:todayStr', ctrlWrapper(getWaterInfoTodayController));
 
 export default waterRouter;

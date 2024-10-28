@@ -5,6 +5,13 @@ operationId: getWaterDay
 description: 'Get water info for a day '
 security:
   - bearerAuth: []
+parameters:
+  - in: path
+    name: todayStr
+    required: true
+    schema:
+      type: string
+      example: '2024-10-28T07:54:33.439Z'
 responses:
   '200':
     description: 'Get water day info'

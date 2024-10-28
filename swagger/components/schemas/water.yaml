@@ -10,7 +10,7 @@ properties:
     type: string
     description: "User's ID"
     example: '609e126aa08b5b3c88b728db'
-  data:
+  date:
     type: string
     description: 'data`s water'
     example: 2024-10-23 13:10

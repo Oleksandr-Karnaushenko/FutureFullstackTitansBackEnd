@@ -64,14 +64,18 @@ export const getMonthWater = async ({ filter = {} }) => {
   };
 };
 
-export const getWaterInfoToday = async (userId) => {
-  const today = new Date();
+export const getWaterInfoToday = async (userId, today) => {
   const startCurrentDate = new Date(
     today.setUTCHours(0, 0, 0, 0),
   ).toISOString();
   const endCurrentDate = new Date(
     today.setUTCHours(23, 59, 59, 999),
   ).toISOString();
+  const user = await UserSchema.findById(userId);
+  if (!user) {
+    throw createHttpError(404, 'User not found');
+  }
+
   const waterEntries = await WaterCollection.find({
     userId,
     date: {
@@ -87,10 +91,6 @@ export const getWaterInfoToday = async (userId) => {
     0,
   );
 
-  const user = await UserSchema.findById(userId);
-  if (!user) {
-    throw createHttpError(404, 'User not found');
-  }
   const { dailyNorm } = user;
 
   const waterVolumeInPercent = Math.min(

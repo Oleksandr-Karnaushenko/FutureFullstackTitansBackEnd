@@ -73,8 +73,10 @@ export const getMonthWaterController = async (req, res) => {
 };
 
 export const getWaterInfoTodayController = async (req, res) => {
+  const { todayStr } = req.params;
   const { _id: userId } = req.user;
-  const data = await waterServices.getWaterInfoToday(userId);
+  const today = new Date(todayStr);
+  const data = await waterServices.getWaterInfoToday(userId, today);
 
   res.json({
     status: 200,

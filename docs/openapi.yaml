@@ -40,7 +40,7 @@ paths:
   /users/avatar/{id}:
     patch:
       $ref: ../swagger/paths/users/{id}/patchAvatar.yaml
-  /water/dayInfo:
+  /water/dayInfo/{todayStr}:
     get:
       $ref: ../swagger/paths/water/getDayInfo.yaml
   /water/monthInfo:
